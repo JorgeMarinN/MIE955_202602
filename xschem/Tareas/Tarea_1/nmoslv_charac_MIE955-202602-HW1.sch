@@ -35,9 +35,9 @@ save @n.xm1.nsg13_lv_nmos[ids]
 save @n.xm1.nsg13_lv_nmos[gm]
 
 
-dc vgs 0.01 1.2 0.01
+*dc vgs 0.01 1.2 0.01
 *dc vds 0.01 1.2 0.01
-*dc vds 0.01 1.2 0.01 vgs 0.1 1.2 0.3
+dc vds 0.01 1.2 0.01 vgs 0.1 1.2 0.3
 
 let idn = @n.xm1.nsg13_lv_nmos[ids]
 let gmn = @n.xm1.nsg13_lv_nmos[gm]
@@ -66,8 +66,8 @@ wrdata /home/designer/shared/MIE955_202602/sim_data/data_nmos_idvgs_VDSp9_gmid-f
 
 let W = 5e-6
 setscale gmoverId
-plot idn/W
-plot vov
+*plot idn/W
+*plot vov
 
 .endc
 " }
