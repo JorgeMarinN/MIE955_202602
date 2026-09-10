@@ -36,6 +36,7 @@ save @n.xm1.nsg13_lv_nmos[gm]
 
 
 dc vgs 0.01 1.2 0.01
+*dc vds 0.01 1.2 0.01
 *dc vds 0.01 1.2 0.01 vgs 0.1 1.2 0.3
 
 let idn = @n.xm1.nsg13_lv_nmos[ids]
@@ -57,6 +58,7 @@ plot idn
 *plot gmn
 *plot xlog gmoverId
 *plot gmoverId
+*plot vthn
 
 wrdata /home/designer/shared/MIE955_202602/sim_data/data_nmos_idvgs_VDSp9_test.txt idn
 
@@ -64,17 +66,17 @@ wrdata /home/designer/shared/MIE955_202602/sim_data/data_nmos_idvgs_VDSp9_gmid-f
 
 let W = 5e-6
 setscale gmoverId
-*plot idn/W
-*plot vov
+plot idn/W
+plot vov
 
 .endc
 " }
 C {devices/ipin.sym} 1090 -360 0 0 {name=p1 lab=g1}
 C {devices/iopin.sym} 1330 -530 0 0 {name=p2 lab=d1}
 C {devices/gnd.sym} 1180 -230 0 0 {name=l3 lab=GND}
-C {sg13g2_pr/sg13_lv_nmos.sym} 1160 -360 2 1 {name=M1
-l=0.5u
-w=5u
+C {sg13g2_pr/sg13_lv_nmos.sym} 1160 -360 0 0 {name=M1
+l=0.45u
+w=1u
 ng=1
 m=1
 model=sg13_lv_nmos

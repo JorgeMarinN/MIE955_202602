@@ -15,6 +15,6 @@ L 4 -4280 -740 -3630 -740 {}
 L 4 -4280 -600 -3630 -600 {}
 T {Actividad 1.} -4230 -800 0 0 0.6 0.6 {}
 T {Actividad 2.} -3900 -800 0 0 0.6 0.6 {}
-C {title.sym} -4150 -530 0 0 {name=l1 author="Prof: Jorge Marín"}
+C {title.sym} -4150 -530 0 0 {name=l1 author="Prof. Jorge Marín, EIE-PUCV, 2026-02"}
 C {../Tarea_1/nmoslv_charac_MIE955-202602-HW1.sym} -4120 -590 0 0 {name=X1}
-C {../Tarea_1/cs_amp_full_MIE955HW1.sym} -3830 -590 0 0 {name=X2}
+C {../Tarea_1/cs_amp_full_FIXED_MIE955HW1.sym} -3830 -590 0 0 {name=X2}
