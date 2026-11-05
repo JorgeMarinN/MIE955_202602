@@ -1,7 +1,7 @@
 ** sch_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_1/cs_amp_full_FIXED_MIE955HW1.sch
 **.subckt cs_amp_full_FIXED_MIE955HW1 vout
 *.iopin vout
-I1 VDD vout 160u
+I1 VDD vout 157u
 XM1 vout vg GND GND sg13_lv_nmos w=47u l=0.45u ng=10 m=1
 B1 net1 GND V = 0.6*(1+tanh(10000*(v(vfb)-v(vref)))) m=1
 V1 vg net1 dc 0 ac 1

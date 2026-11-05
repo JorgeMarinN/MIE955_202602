@@ -1,0 +1,73 @@
+** sch_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_2/nmos_charac_IPD413HW2_LVT_IHP.sch
+**.subckt nmos_charac_IPD413HW2_LVT_IHP g1 d1
+*.ipin g1
+*.iopin d1
+XM1 d1 g1 GND GND sg13_lv_nmos w=1u l=0.5u ng=1 m=1
+**** begin user architecture code
+
+
+
+vgs g1 0 dc=0.9
+vds d1 0 dc=0.9
+
+.control
+save all
+
+
+save @n.xm1.nsg13_lv_nmos[ids]
+save @n.xm1.nsg13_lv_nmos[gm]
+
+
+dc vgs 0 1.8 0.01
+
+let idn = @n.xm1.nsg13_lv_nmos[ids]
+let gmn = @n.xm1.nsg13_lv_nmos[gm]
+let vthn = @n.xm1.nsg13_lv_nmos[vth]
+let vgsn = @n.xm1.nsg13_lv_nmos[vgs]
+*let vdsatn = @n.xm1.nsg13_lv_nmos[vdsat]
+let vov1 = v(g1) - vthn
+let vov2 = 2*idn/gmn
+
+plot idn
+*plot idn vs vov1
+*plot idn vs vov2
+*plot vov2
+*plot gmn vs vov2
+*plot idn vs vdsatn
+
+let W = 1e-6
+let a = gmn/idn
+setscale a
+plot idn/W
+plot vov2
+
+
+
+*wrdata /foss/designs/UNIC-CASS_OS_analog_flow/data_nmos_idvgs_VDSp9_test.txt idn
+
+
+.endc
+
+
+
+
+.lib cornerMOShv.lib mos_tt
+.lib cornerMOSlv.lib mos_tt
+*.lib cornerMOShv.lib mos_ff
+*.lib cornerMOSlv.lib mos_ff
+*.lib cornerMOShv.lib mos_ss
+*.lib cornerMOSlv.lib mos_ss
+*.lib cornerMOShv.lib mos_sf
+*.lib cornerMOSlv.lib mos_sf
+*.lib cornerMOShv.lib mos_fs
+*.lib cornerMOSlv.lib mos_fs
+
+.include /opt/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/spice/sg13g2_stdcell.spice
+.lib /opt/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerRES.lib res_typ
+.lib /opt/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerCAP.lib cap_typ
+*.lib /opt/pdks/ihp-sg13g2/libs.tech/ngspice/models/diodes.lib
+
+**** end user architecture code
+**.ends
+.GLOBAL GND
+.end

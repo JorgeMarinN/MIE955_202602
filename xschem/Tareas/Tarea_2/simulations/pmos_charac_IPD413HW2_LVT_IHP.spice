@@ -1,0 +1,73 @@
+** sch_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_2/pmos_charac_IPD413HW2_LVT_IHP.sch
+**.subckt pmos_charac_IPD413HW2_LVT_IHP g1 d1 vsup
+*.ipin g1
+*.iopin d1
+*.iopin vsup
+XM1 d1 g1 vsup vsup sg13_lv_pmos w=1u l=0.5u ng=1 m=1
+**** begin user architecture code
+
+
+vsup vsup 0 dc=1.2
+vgs g1 vsup dc=0.6
+vds d1 vsup dc=0.6
+
+.control
+save all
+
+save @n.xm1.nsg13_lv_pmos[ids]
+save @n.xm1.nsg13_lv_pmos[gm]
+
+
+dc vgs 0 0.7 0.01
+
+let idn = @n.xm1.nsg13_lv_pmos[ids]
+let gmn = @n.xm1.nsg13_lv_pmos[gm]
+let vthn = @n.xm1.nsg13_lv_pmos[vth]
+let vgsn = @n.xm1.nsg13_lv_pmos[vgs]
+*let vdsatn = @n.xm1.nsg13_lv_pmos[vdsat]
+let vov1 = v(g1) - vthn
+let vov2 = 2*idn/gmn
+
+plot idn
+plot gmn
+*plot idn vs vov1
+*plot idn vs vov2
+*plot vov2
+*plot gmn vs vov2
+*plot idn vs vdsatn
+
+let W = 1e-6
+let a = gmn/idn
+setscale a
+plot idn/W
+plot vov2
+
+
+
+*wrdata /foss/designs/IPD413_2023/HW1/data_nmos_idvgs_VDSp9_testlalarcon.dat idn
+
+
+.endc
+
+
+
+
+.lib cornerMOShv.lib mos_tt
+.lib cornerMOSlv.lib mos_tt
+*.lib cornerMOShv.lib mos_ff
+*.lib cornerMOSlv.lib mos_ff
+*.lib cornerMOShv.lib mos_ss
+*.lib cornerMOSlv.lib mos_ss
+*.lib cornerMOShv.lib mos_sf
+*.lib cornerMOSlv.lib mos_sf
+*.lib cornerMOShv.lib mos_fs
+*.lib cornerMOSlv.lib mos_fs
+
+.include /opt/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/spice/sg13g2_stdcell.spice
+.lib /opt/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerRES.lib res_typ
+.lib /opt/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerCAP.lib cap_typ
+*.lib /opt/pdks/ihp-sg13g2/libs.tech/ngspice/models/diodes.lib
+
+**** end user architecture code
+**.ends
+.end

@@ -49,8 +49,8 @@ wrdata /home/designer/shared/MIE955_202602/sim_data/data_nmos_idvgs_VDSp9_gmid-f
 
 let W = 5e-6
 setscale gmoverId
-*plot idn/W
-*plot vov
+plot idn/W
+plot vov
 
 .endc
 

@@ -1,0 +1,113 @@
+** sch_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_2/tb_OTA_lvt.sch
+**.subckt tb_OTA_lvt
+V1 VDD GND 1.2
+I0 VDD V_IBIAS 1u
+V2 net1 GND {CM_VOLTAGE}
+V3 INP net1 AC 1
+C1 OUT GND 2p m=1
+R1 net2 INM 10E6 m=1
+V4 OUT net2 {OUTPUT_VOLTAGE-CM_VOLTAGE}
+C2 INM GND 1 m=1
+x1 INP INM OUT VDD GND V_IBIAS OTA3_jm
+**** begin user architecture code
+
+
+.param CM_VOLTAGE = 0.6
+.param OUTPUT_VOLTAGE = 0.6
+.control
+save all
+ac dec 200 10 1000Meg
+settype decibel out
+plot vdb(out)
+let phase_val = 180/PI*cph(out)
+let phase_margin_val = 180 + 180/PI*cph(out)
+settype phase phase_val
+plot phase_val
+meas ac phase_margin find phase_margin_val when vdb(out)=0
+meas ac gain_bandwidth WHEN vdb(out)=0
+op
+
+let id1  = @n.x1.xm1.nsg13_lv_nmos[ids]
+let id2  = @n.x1.xm2.nsg13_lv_nmos[ids]
+let id3  = @n.x1.xm3.nsg13_lv_pmos[ids]
+let id4  = @n.x1.xm4.nsg13_lv_pmos[ids]
+let id5  = @n.x1.xm5.nsg13_lv_pmos[ids]
+let id6  = @n.x1.xm6.nsg13_lv_nmos[ids]
+let id7  = @n.x1.xm7.nsg13_lv_nmos[ids]
+let id8  = @n.x1.xm8.nsg13_lv_nmos[ids]
+
+let gm1  = @n.x1.xm1.nsg13_lv_nmos[gm]
+let gm2  = @n.x1.xm2.nsg13_lv_nmos[gm]
+let gm3  = @n.x1.xm3.nsg13_lv_pmos[gm]
+let gm4  = @n.x1.xm4.nsg13_lv_pmos[gm]
+let gm5  = @n.x1.xm5.nsg13_lv_pmos[gm]
+let gm6  = @n.x1.xm6.nsg13_lv_nmos[gm]
+let gm7  = @n.x1.xm7.nsg13_lv_nmos[gm]
+let gm8  = @n.x1.xm8.nsg13_lv_nmos[gm]
+
+let r01  = @n.x1.xm1.nsg13_lv_nmos[gds]
+let r02  = @n.x1.xm2.nsg13_lv_nmos[gds]
+let r04  = @n.x1.xm4.nsg13_lv_pmos[gds]
+let r05  = @n.x1.xm5.nsg13_lv_pmos[gds]
+let r06  = @n.x1.xm6.nsg13_lv_nmos[gds]
+
+let cgs5  = @n.x1.xm5.nsg13_lv_pmos[cgg]
+
+print v(inp)
+print v(inm)
+print v(out)
+
+print cgs5
+print id1
+print id2
+print id5
+print gm1
+print gm2
+print gm5
+.endc
+
+
+
+
+.lib cornerMOShv.lib mos_tt
+.lib cornerMOSlv.lib mos_tt
+*.lib cornerMOShv.lib mos_ff
+*.lib cornerMOSlv.lib mos_ff
+*.lib cornerMOShv.lib mos_ss
+*.lib cornerMOSlv.lib mos_ss
+*.lib cornerMOShv.lib mos_sf
+*.lib cornerMOSlv.lib mos_sf
+*.lib cornerMOShv.lib mos_fs
+*.lib cornerMOSlv.lib mos_fs
+
+.include /opt/pdks/ihp-sg13g2/libs.ref/sg13g2_stdcell/spice/sg13g2_stdcell.spice
+.lib /opt/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerRES.lib res_typ
+.lib /opt/pdks/ihp-sg13g2/libs.tech/ngspice/models/cornerCAP.lib cap_typ
+*.lib /opt/pdks/ihp-sg13g2/libs.tech/ngspice/models/diodes.lib
+
+**** end user architecture code
+**.ends
+
+* expanding   symbol:  OTA3_jm.sym # of pins=6
+** sym_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_2/OTA3_jm.sym
+** sch_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_2/OTA3_jm.sch
+.subckt OTA3_jm IN_P IN_N OUT VDD VSS ibias
+*.ipin IN_N
+*.ipin IN_P
+*.opin OUT
+*.ipin VDD
+*.ipin VSS
+*.ipin ibias
+C2 OUT Vo1_p 1p m=1
+XM8 ibias ibias VSS VSS sg13_lv_nmos w=1u l=0.5u ng=1 m=1
+XM7 Vsrc ibias VSS VSS sg13_lv_nmos w=1.5u l=0.5u ng=1 m=1
+XM6 OUT ibias VSS VSS sg13_lv_nmos w=1u l=0.5u ng=1 m=5
+XM1 Vo1_n IN_N Vsrc VSS sg13_lv_nmos w=1u l=0.5u ng=1 m=1
+XM2 Vo1_p IN_P Vsrc VSS sg13_lv_nmos w=1u l=0.5u ng=1 m=1
+XM3 Vo1_n Vo1_n VDD VDD sg13_lv_pmos w=1u l=0.8u ng=1 m=1
+XM4 Vo1_p Vo1_n VDD VDD sg13_lv_pmos w=1u l=0.8u ng=1 m=1
+XM5 OUT Vo1_p VDD VDD sg13_lv_pmos w=5u l=0.5u ng=1 m=5
+.ends
+
+.GLOBAL GND
+.end
