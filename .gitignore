@@ -1,7 +1,9 @@
 # Ignore simulation data folder
 sim_data
 xschem/Tareas/Tarea_1/jm
+xschem/Tareas/Tarea_1/simulations
 xschem/Tareas/Tarea_2/jm
+xschem/Tareas/Tarea_2/simulations
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

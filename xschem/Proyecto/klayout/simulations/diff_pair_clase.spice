@@ -1,0 +1,6 @@
+** sch_path: /home/designer/shared/MIE955_202602/xschem/Proyecto/klayout/diff_pair_clase.sch
+.subckt diff_pair_clase D_N D_P S_COM B_COM IN_P IN_P
+*.PININFO D_N:B D_P:B S_COM:B B_COM:B IN_P:B IN_P:B
+MM1 D_N IN_P S_COM B_COM sg13_lv_nmos w=1u l=0.5u ng=1 m=1
+MM2 D_P IN_P S_COM B_COM sg13_lv_nmos w=1u l=0.5u ng=1 m=1
+.ends

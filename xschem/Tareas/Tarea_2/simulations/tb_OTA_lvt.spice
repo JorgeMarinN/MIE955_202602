@@ -4,11 +4,11 @@ V1 VDD GND 1.2
 I0 VDD V_IBIAS 1u
 V2 net1 GND {CM_VOLTAGE}
 V3 INP net1 AC 1
-C1 OUT GND 2p m=1
+C1 OUT GND 5p m=1
 R1 net2 INM 10E6 m=1
 V4 OUT net2 {OUTPUT_VOLTAGE-CM_VOLTAGE}
 C2 INM GND 1 m=1
-x1 INP INM OUT VDD GND V_IBIAS OTA3_jm
+x1 INP INM OUT VDD GND V_IBIAS OTA3
 **** begin user architecture code
 
 
@@ -88,10 +88,10 @@ print gm5
 **** end user architecture code
 **.ends
 
-* expanding   symbol:  OTA3_jm.sym # of pins=6
-** sym_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_2/OTA3_jm.sym
-** sch_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_2/OTA3_jm.sch
-.subckt OTA3_jm IN_P IN_N OUT VDD VSS ibias
+* expanding   symbol:  OTA3.sym # of pins=6
+** sym_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_2/OTA3.sym
+** sch_path: /home/designer/shared/MIE955_202602/xschem/Tareas/Tarea_2/OTA3.sch
+.subckt OTA3 IN_P IN_N OUT VDD VSS ibias
 *.ipin IN_N
 *.ipin IN_P
 *.opin OUT
